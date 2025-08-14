@@ -32,11 +32,14 @@ header .container {
 
 .logo {
     height: 50px;
+    width: auto;
 }
 
 nav ul {
     display: flex;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
@@ -47,18 +50,26 @@ nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #e30613;
 }
 
 .phone {
     text-decoration: none;
     color: #e30613;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 /* Баннер */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/hero-bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://www.zoomlion.com/uploads/ueditor/image/20220428/1651120124115436.jpg');
     background-size: cover;
+    background-position: center;
     color: white;
     text-align: center;
     padding: 100px 0;
@@ -83,6 +94,8 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     transition: background 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -128,11 +141,13 @@ nav ul li a {
 .product-card h3 {
     padding: 15px;
     margin: 0;
+    font-size: 1.2rem;
 }
 
 .product-card p {
     padding: 0 15px 15px;
     margin: 0;
+    color: #666;
 }
 
 /* Преимущества */
@@ -155,6 +170,7 @@ nav ul li a {
 
 .advantage-card h3 {
     margin-top: 0;
+    font-size: 1.3rem;
 }
 
 /* Контакты */
@@ -175,10 +191,12 @@ input, textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 textarea {
     height: 150px;
+    resize: vertical;
 }
 
 /* Подвал */
@@ -192,6 +210,7 @@ footer {
 footer a {
     color: #e30613;
     text-decoration: none;
+    font-weight: bold;
 }
 
 /* Адаптив */
@@ -202,9 +221,19 @@ footer a {
 
     nav ul {
         margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
     }
 
     .hero h1 {
         font-size: 2rem;
+    }
+
+    .product-grid, .advantages-grid {
+        grid-template-columns: 1fr;
     }
 }
