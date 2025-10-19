@@ -3,101 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoomlion - Складская и подъемная техника</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Zoomlion - Официальный дилер складской техники</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --zoomlion-green: #85ec0e;
+            --dark-blue: #003366;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--zoomlion-green);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--zoomlion-green);
+            color: #333;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: white;
+            border-color: var(--zoomlion-green);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark-blue);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .products {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .product-img:hover {
+            transform: scale(1.03);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-top: 0;
+            color: var(--dark-blue);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .feature-item {
+            padding: 30px 20px;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: var(--zoomlion-green);
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--zoomlion-green);
+        }
+        
+        /* Модальное окно с эффектом затемнения */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0);
+            overflow: auto;
+            transition: background-color 0.4s ease-out;
+        }
+        
+        .modal.active {
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease-out 0.1s;
+        }
+        
+        .modal.active .modal-content {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            z-index: 1001;
+        }
+        
+        .close:hover {
+            color: var(--zoomlion-green);
+            transform: scale(1.2);
+        }
+        
+        .caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        
+        /* Активная ссылка в навигации */
+        nav a.active {
+            color: var(--zoomlion-green);
+            font-weight: bold;
+            position: relative;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--zoomlion-green);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+            
+            .footer-content {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Шапка с меню -->
     <header>
         <div class="container">
-            <img src="https://www.zoomlion.com/static/home/images/logo.png" alt="Zoomlion" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="#products">Техника</a></li>
-                    <li><a href="#advantages">Преимущества</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
-                </ul>
-            </nav>
-            <a href="tel:+78001234567" class="phone">+7 (800) 123-45-67</a>
+            <div class="header-content">
+                <img src="images/logo.png" alt="Zoomlion Logo" class="logo">
+                <nav>
+                    <ul>
+                        <li><a href="#products" class="active">Продукция</a></li>
+                        <li><a href="#features">Преимущества</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+                <a href="tel:+78001234567" class="btn">+7 (800) 123-45-67</a>
+            </div>
         </div>
     </header>
 
-    <!-- Главный баннер -->
     <section class="hero">
         <div class="container">
-            <h1>Профессиональная складская и подъемная техника Zoomlion</h1>
-            <p>Надежность, инновации и лучшая цена на рынке</p>
-            <a href="#contacts" class="btn">Оставить заявку</a>
+            <h1>Профессиональная складская техника Zoomlion</h1>
+            <p>Официальный дилер в России с полным сервисным обслуживанием</p>
+            <a href="#contacts" class="btn">Получить консультацию</a>
         </div>
     </section>
 
-    <!-- Каталог техники -->
     <section id="products" class="products">
         <div class="container">
-            <h2>Наша техника</h2>
+            <h2 class="section-title">Наша продукция</h2>
             <div class="product-grid">
+                <!-- Вилочные погрузчики -->
                 <div class="product-card">
-                    <img src="https://www.zoomlion.com/uploads/ueditor/image/20220428/1651120124115436.jpg" alt="Вилочный погрузчик">
-                    <h3>Вилочные погрузчики</h3>
-                    <p>Грузоподъемность до 10 тонн</p>
+                    <img src="images/forklift.jpg" alt="Вилочный погрузчик Zoomlion FD50" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Вилочные погрузчики</h3>
+                        <p>Грузоподъемность от 1 до 10 тонн. Электрические и дизельные модели.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
                 </div>
+                
+                <!-- Ножничные подъемники -->
                 <div class="product-card">
-                    <img src="https://www.zoomlion.com/uploads/ueditor/image/20220428/1651120124115436.jpg" alt="Автокран">
-                    <h3>Автокраны</h3>
-                    <p>Грузоподъемность до 100 тонн</p>
+                    <img src="images/scissor-lift.jpg" alt="Ножничный подъемник Zoomlion ZS0407DC" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Ножничные подъемники</h3>
+                        <p>Высота подъема до 12 метров. Стабильная платформа для работ на высоте.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
                 </div>
+                
+                <!-- Телескопические подъемники -->
                 <div class="product-card">
-                    <img src="https://www.zoomlion.com/uploads/ueditor/image/20220428/1651120124115436.jpg" alt="Ричстакер">
-                    <h3>Ричстакеры</h3>
-                    <p>Высота подъема до 15 м</p>
+                    <img src="images/telescopic-lift.jpg" alt="Телескопический подъемник Zoomlion ZT26J" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Телескопические подъемники</h3>
+                        <p>Грузоподъемность до 500 кг. Большой вылет стрелы.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
+                </div>
+                
+                <!-- Коленчатые подъемники -->
+                <div class="product-card">
+                    <img src="images/articulating-boom.jpg" alt="Коленчатый подъемник Zoomlion ZA14J" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Коленчатые подъемники</h3>
+                        <p>Рабочая высота до 18 метров. Обход препятствий.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
+                </div>
+                
+                <!-- Телескопические погрузчики -->
+                <div class="product-card">
+                    <img src="images/telehandler.jpg" alt="Телескопический погрузчик Zoomlion ZL50GV" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Телескопические погрузчики</h3>
+                        <p>Грузоподъемность до 3 тонн. Многофункциональное оборудование.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
+                </div>
+
+                <!-- Навесное оборудование -->
+                <div class="product-card">
+                    <img src="images/attachments.jpg" alt="Навесное оборудование Zoomlion" class="product-img" onclick="openModal(this)">
+                    <div class="product-info">
+                        <h3>Навесное оборудование</h3>
+                        <p>Широкий выбор навесного оборудования для любой задачи.</p>
+                        <a href="#contacts" class="btn">Получить КП</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Преимущества -->
-    <section id="advantages" class="advantages">
+    <section id="features" class="features">
         <div class="container">
-            <h2>Почему выбирают Zoomlion?</h2>
-            <div class="advantages-grid">
-                <div class="advantage-card">
-                    <h3>🚜 Высокая надежность</h3>
-                    <p>Техника проходит строгий контроль качества</p>
+            <h2 class="section-title">Почему выбирают Zoomlion?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Высокая производительность</h3>
+                    <p>Мощные и надежные двигатели для интенсивной работы</p>
                 </div>
-                <div class="advantage-card">
-                    <h3>💵 Лучшая цена</h3>
-                    <p>Оптимальное соотношение цены и качества</p>
+                <div class="feature-item">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Сервисное обслуживание</h3>
+                    <p>Гарантия и постпродажная поддержка по всей России</p>
                 </div>
-                <div class="advantage-card">
-                    <h3>🔧 Сервисное обслуживание</h3>
-                    <p>Гарантия и постпродажная поддержка</p>
+                <div class="feature-item">
+                    <div class="feature-icon">💚</div>
+                    <h3>Экологичность</h3>
+                    <p>Современные экологические стандарты и низкий расход</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Лучшая цена</h3>
+                    <p>Оптимальное соотношение цены и качества на рынке</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section id="contacts" class="contacts">
+    <footer id="contacts">
         <div class="container">
-            <h2>Оставьте заявку</h2>
-            <form>
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="tel" placeholder="Телефон" required>
-                <textarea placeholder="Сообщение"></textarea>
-                <button type="submit" class="btn">Отправить</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Подвал -->
-    <footer>
-        <div class="container">
-            <p>© 2024 Официальный дилер Zoomlion</p>
-            <a href="tel:+79375844555">+7 (937) 584-45-55</a>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>📞 <a href="tel:+79375844555">+7 (937) 584-45-55</a></p>
+                    <p>✉️ <a href="mailto:info@zoomlion-rus.ru">info@zoomlion-rus.ru</a></p>
+                    <p>🕒 Пн-Пт: 9:00-18:00</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Продукция</h4>
+                    <p><a href="#products">Вилочные погрузчики</a></p>
+                    <p><a href="#products">Подъемники</a></p>
+                    <p><a href="#products">Навесное оборудование</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Компания</h4>
+                    <p>Официальный дилер Zoomlion</p>
+                    <p>Поставки по всей России</p>
+                    <p>Сервисное обслуживание</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
+                <p>© 2024 Zoomlion Russia. Все права защищены.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Модальное окно -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-img">
+            <div id="caption" class="caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Модальное окно с анимацией
+        function openModal(img) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            const captionText = document.getElementById("caption");
+            
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            captionText.innerHTML = img.alt;
+            
+            // Активируем анимацию
+            setTimeout(() => {
+                modal.classList.add("active");
+            }, 10);
+            
+            // Блокировка прокрутки фона
+            document.body.style.overflow = "hidden";
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            
+            // Деактивируем анимацию
+            modal.classList.remove("active");
+            
+            // Ждем завершения анимации перед скрытием
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 400);
+            
+            // Разблокировка прокрутки фона
+            document.body.style.overflow = "auto";
+        }
+        
+        // Закрытие по клику вне изображения
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Закрытие по клавише ESC
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.key === "Escape" && modal.style.display === "block") {
+                closeModal();
+            }
+        });
+        
+        // Плавная прокрутка и подсветка активного раздела
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Плавная прокрутка
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Обновляем активную ссылку
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Подсветка активного раздела при скролле
+            function highlightActiveSection() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Анимация при прокрутке
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.product-card, .section-title');
+                
+                elements.forEach(el => {
+                    const elementPosition = el.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Инициализация анимаций
+            window.addEventListener('load', function() {
+                animateOnScroll();
+                highlightActiveSection();
+            });
+            
+            window.addEventListener('scroll', function() {
+                animateOnScroll();
+                highlightActiveSection();
+            });
+        });
+    </script>
 </body>
 </html>
