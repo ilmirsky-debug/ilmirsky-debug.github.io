@@ -66,7 +66,7 @@ nav ul li a:hover, nav ul li a:focus {
 }
 
 .hero-banner {
-    background: url('images/hero-background.webp') center/cover no-repeat;
+    background: url('images/hero-background.jpg.gif') center/cover no-repeat;
     height: 195px;
     width: 100%;
 }
