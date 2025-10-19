@@ -72,12 +72,14 @@
             color: var(--zoomlion-green);
         }
         
+        /* Убрано активное состояние навигации */
+        
         .hero-banner {
             background: url('images/hero-background.jpg.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 195px; /* Высота оригинального изображения */
+            height: 195px;
             width: 100%;
         }
         
@@ -300,23 +302,6 @@
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
         
-        /* Активная ссылка в навигации */
-        nav a.active {
-            color: var(--zoomlion-green);
-            font-weight: bold;
-            position: relative;
-        }
-        
-        nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--zoomlion-green);
-        }
-        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -364,7 +349,7 @@
                 <img src="images/logo.png.gif" alt="Zoomlion Logo" class="logo">
                 <nav>
                     <ul>
-                        <li><a href="#products" class="active">Продукция</a></li>
+                        <li><a href="#products">Продукция</a></li>
                         <li><a href="#features">Преимущества</a></li>
                         <li><a href="#contacts">Контакты</a></li>
                     </ul>
@@ -569,10 +554,9 @@
             }
         });
         
-        // Плавная прокрутка и подсветка активного раздела
+        // Плавная прокрутка (без подсветки активного раздела)
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('nav a');
-            const sections = document.querySelectorAll('section[id]');
             
             // Плавная прокрутка
             navLinks.forEach(link => {
@@ -586,34 +570,9 @@
                             top: targetSection.offsetTop - 80,
                             behavior: 'smooth'
                         });
-                        
-                        // Обновляем активную ссылку
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        this.classList.add('active');
                     }
                 });
             });
-            
-            // Подсветка активного раздела при скролле
-            function highlightActiveSection() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= sectionTop - 150) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
             
             // Анимация при прокрутке
             function animateOnScroll() {
@@ -633,12 +592,10 @@
             // Инициализация анимаций
             window.addEventListener('load', function() {
                 animateOnScroll();
-                highlightActiveSection();
             });
             
             window.addEventListener('scroll', function() {
                 animateOnScroll();
-                highlightActiveSection();
             });
         });
     </script>
