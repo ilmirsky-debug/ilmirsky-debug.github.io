@@ -73,22 +73,11 @@
         }
         
         .hero {
-            background: 
-                /* Темный оверлей для лучшей читаемости текста */
-                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                /* Фоновое изображение с минимальным масштабированием */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
                 url('images/hero-background.jpg.gif');
-            background-size: contain; /* Не растягиваем, сохраняем пропорции */
-            background-position: center;
-            background-repeat: repeat-x; /* Повторяем по горизонтали если нужно */
-            background-color: #2c3e50; /* Фон на случай если изображение не заполняет всю область */
-            color: white;
-            text-align: center;
-            padding: 80px 0;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            position: relative;
+    background-size: auto 100%; /* Высота 100%, ширина автоматически */
+    background-position: center;
+    background-repeat: no-repeat;
         }
         
         .hero .container {
