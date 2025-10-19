@@ -72,29 +72,30 @@
             color: var(--zoomlion-green);
         }
         
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('images/hero-background.jpg.gif');
-    background-size: auto 100%; /* Высота 100%, ширина автоматически */
-    background-position: center;
-    background-repeat: no-repeat;
+        .hero-banner {
+            background: url('images/hero-background.jpg.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 195px; /* Высота оригинального изображения */
+            width: 100%;
         }
         
-        .hero .container {
-            position: relative;
-            z-index: 2;
+        .hero-content {
+            background: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 60px 0;
         }
         
-        .hero h1 {
+        .hero-content h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
         
-        .hero p {
+        .hero-content p {
             font-size: 1.2rem;
             margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -332,14 +333,12 @@
                 margin: 5px 15px;
             }
             
-            .hero {
-                padding: 60px 0;
-                min-height: 250px;
-                background-size: cover; /* На мобильных можно растянуть */
+            .hero-content h1 {
+                font-size: 2rem;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .hero-content {
+                padding: 40px 0;
             }
             
             .modal-content {
@@ -354,12 +353,6 @@
             
             .footer-content {
                 text-align: center;
-            }
-        }
-
-        @media (min-width: 1311px) {
-            .hero {
-                background-size: 100% auto; /* На больших экранах растягиваем по ширине */
             }
         }
     </style>
@@ -381,7 +374,11 @@
         </div>
     </header>
 
-    <section class="hero">
+    <!-- Баннер с изображением -->
+    <div class="hero-banner"></div>
+
+    <!-- Контент под баннером -->
+    <section class="hero-content">
         <div class="container">
             <h1>Профессиональная складская техника Zoomlion</h1>
             <p>Официальный дилер в России с полным сервисным обслуживанием</p>
@@ -399,7 +396,7 @@
                     <div class="product-info">
                         <h3>Вилочные погрузчики</h3>
                         <p>Грузоподъемность от 1 до 18 тонн. Электрические и дизельные модели.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
                 
@@ -409,7 +406,7 @@
                     <div class="product-info">
                         <h3>Ножничные подъемники</h3>
                         <p>Высота подъема до 12 метров. Стабильная платформа для работ на высоте.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
                 
@@ -419,7 +416,7 @@
                     <div class="product-info">
                         <h3>Телескопические подъемники</h3>
                         <p>Грузоподъемность до 500 кг. Большой вылет стрелы.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
                 
@@ -429,7 +426,7 @@
                     <div class="product-info">
                         <h3>Коленчатые подъемники</h3>
                         <p>Рабочая высота до 18 метров. Обход препятствий.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
                 
@@ -439,7 +436,7 @@
                     <div class="product-info">
                         <h3>Телескопические погрузчики</h3>
                         <p>Грузоподъемность до 3 тонн. Многофункциональное оборудование.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
 
@@ -449,7 +446,7 @@
                     <div class="product-info">
                         <h3>Навесное оборудование</h3>
                         <p>Широкий выбор навесного оборудования для любой задачи.</p>
-                        <a href="#contacts" class="btn">
+                        <a href="#contacts" class="btn">Получить КП</a>
                     </div>
                 </div>
             </div>
